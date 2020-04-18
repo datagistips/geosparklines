@@ -1,7 +1,7 @@
 #' Calculate a geographically placed Sparkline
 #'
 #' @param coords Point coordinates
-#' @param v Values associated to point
+#' @param values Values associated to point
 #' @param max_v Maximum value
 #' @param width width
 #' @param height height
@@ -11,24 +11,24 @@
 #' @import magrittr sf dplyr
 #' @export
 
-one_geospark <- function(coords, v, max_v = NULL, width, height, mode = "normal") {
+one_geospark <- function(coords, values, max_v = NULL, width, height, mode = "normal") {
 
-  if(is.null(max_v)) max_v <- max(v)
+  if(is.null(max_v)) max_v <- max(values)
 
-  if(min(v)< 0) v <- v - min(v)
+  if(min(values)< 0) values <- values - min(values)
 
   if(mode == "normal") {
 
     mult <- height / max_v
-    heights <- v * mult
+    heights <- values * mult
   } else if (mode == "log"){
 
     mult <- height / log(max_v)
-    log_v <- ifelse(v == 0, 0, log(v))
+    log_v <- ifelse(values == 0, 0, log(values))
     heights <- log_v * mult
   }
 
-  coords_x <- coords[1] + seq(0, width, length.out = length(v))
+  coords_x <- coords[1] + seq(0, width, length.out = length(values))
   coords_y <- coords[2] + heights
   coords <- cbind(coords_x, coords_y)
 

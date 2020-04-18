@@ -4,12 +4,12 @@
 \alias{one_geospark}
 \title{Calculate a geographically placed Sparkline}
 \usage{
-one_geospark(coords, v, max_v = NULL, width, height, mode = "normal")
+one_geospark(coords, values, max_v = NULL, width, height, mode = "normal")
 }
 \arguments{
 \item{coords}{Point coordinates}
 
-\item{v}{Values associated to point}
+\item{values}{Values associated to point}
 
 \item{max_v}{Maximum value}
 
