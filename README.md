@@ -1,8 +1,6 @@
 # geosparklines
 
-`geosparklines` is an R package to generate SparkLines on a Map
-
-<img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=300 height=300></img>
+`geosparklines` is an R package to generate SparkLines Spatial Objects which can be further put on a Map
 
 ## Quick Start
 
@@ -28,8 +26,10 @@ st_geometry(f) <- geosparks
 See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and an example on using Plate Carrée CRS instead ;-)
 
 ## Example map
-[Example map on COVID-19 cases in France rendered in QGIS](https://github.com/datagistips/sparkline_map/blob/master/images/map.png)
+[Example of rendering in QGIS of COVID-19 cases in France](https://github.com/datagistips/sparkline_map/blob/master/images/map.png)
 
-## Licence
+<img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=500 height=500 align=middle></img>
+
+## License
 Author : Mathieu Rajerison  
-CC-BY
+GPL-3
