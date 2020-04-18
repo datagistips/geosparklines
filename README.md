@@ -1,6 +1,6 @@
 # geosparklines
 
-`geosparklines` is an R package to generate SparkLines SpatialFeatureCollection (sfc) objects which can be further put on a Map
+`geosparklines` is an R package to generate SparkLines SimpleFeatureCollection (sfc) objects which can be further put on a Map
 
 ## Quick Start
 
