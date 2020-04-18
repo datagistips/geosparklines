@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>How to use geosparklines</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">How to use geosparklines</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(geosparklines)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">library</span>(sf)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">library</span>(sp)</a></code></pre></div>
+<div id="prepare-your-data" class="section level2">
+<h2>Prepare your Data</h2>
+<p>First, download the world COVID-19 cases from John Hopkins Institute</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; Parsed with column specification:</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; cols(</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;   .default = col_double(),</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;   `Province/State` = col_character(),</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;   `Country/Region` = col_character()</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; )</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; See spec(...) for full column specifications.</span></a></code></pre></div>
+<p>You’ll need :</p>
+<ul>
+<li>some coordinates for the source points</li>
+<li>the stat values (here in wide column-wise format, not long row-wise format) which will draw the lines</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">coords &lt;-<span class="st"> </span>f[, <span class="kw">c</span>(<span class="st">&quot;Long&quot;</span>, <span class="st">&quot;Lat&quot;</span>)]</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">my_stats &lt;-<span class="st"> </span>f[, <span class="dv">5</span><span class="op">:</span><span class="kw">ncol</span>(f)]</a></code></pre></div>
+</div>
+<div id="create-your-geosparklines" class="section level2">
+<h2>Create your GeoSparkLines</h2>
+<p>Define the width and height in spatial units, for your lines and the mode : <code>normal</code> or <code>log</code> for your values</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">## Whole world</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">geosparks &lt;-<span class="st"> </span><span class="kw">geospark</span>(coords, my_stats, <span class="dt">width=</span><span class="dv">20</span>, <span class="dt">height=</span><span class="dv">20</span>, <span class="dt">mode =</span> <span class="st">&quot;log&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(geosparks))</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>You can add your GeoSparkLines to your data :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">st_geometry</span>(f) &lt;-<span class="st"> </span>geosparks</a></code></pre></div>
+<p>Let’s plot it, based on a log value of the last day cases</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">## Plot</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">plot</span>(f <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">       </span><span class="kw">mutate</span>(<span class="dt">v =</span> <span class="kw">ifelse</span>(.<span class="op">$</span><span class="st">`</span><span class="dt">4/17/20</span><span class="st">`</span> <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">log</span>(.<span class="op">$</span><span class="st">`</span><span class="dt">4/17/20</span><span class="st">`</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">       </span><span class="kw">select</span>(v))</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; Warning in log(.$`4/17/20`): NaNs produced</span></a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div id="export-your-work" class="section level3">
+<h3>Export your work</h3>
+<p>…for further styling, for example in QGIS</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">st_write</span>(f, <span class="st">&quot;data/world_sparklines.gpkg&quot;</span>, <span class="dt">delete_dsn =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="reproject-to-plate-carrae" class="section level2">
+<h2>Reproject to Plate CarrÃ©e</h2>
+<p>Notice the Coordinate Reference System is not appropriate for our purpose because it’s WGS84 and it distorts the lines to the extreme as we go North or South.</p>
+<p>So, let’s the adopt a Plate CarrÃ©e projection. I created my own CRS with shifted bounds (see lon_1, lat_1, lon_2 and lat_2 paramaters) :</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(sp)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">crs_string &lt;-<span class="st"> &quot;+proj=eqc +lat_ts=0 +lat_1=-1000 +lon_1=-1000  +lat_2=1000 +lon_2=1000  +lat_0=0 +lon_0=0  +x_0=0 +y_0=0  +datum=WGS84 +units=m +no_defs&quot;</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">my_crs &lt;-<span class="st"> </span>crs_string <span class="op">%&gt;%</span><span class="st"> </span>CRS</a></code></pre></div>
+<p>Let’s reproject data</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">coords_pc &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(coords), <span class="cf">function</span>(x) <span class="kw">st_point</span>(<span class="kw">as.numeric</span>(coords[x, ]))) <span class="op">%&gt;%</span><span class="st"> </span>st_sfc <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_set_crs</span>(<span class="dv">4326</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_transform</span>(my_crs) <span class="op">%&gt;%</span><span class="st"> </span>st_sfc <span class="op">%&gt;%</span><span class="st"> </span>st_coordinates</a></code></pre></div>
+<p>Now, you can use it the same way as before for your data. But you’ll need to adjust width and height according to the coordinate reference system</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">geosparks &lt;-<span class="st"> </span><span class="kw">geospark</span>(coords_pc, my_stats, <span class="dt">width=</span><span class="dv">1000000</span>, <span class="dt">height=</span><span class="dv">1000000</span>, <span class="dt">mode =</span> <span class="st">&quot;log&quot;</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">plot</span>(geosparks)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="individual-sparklines" class="section level2">
+<h2>Individual sparklines</h2>
+<p>You may want to create sparklines individually, for example to pilot the individual heights and widths of your sparklines based on statistical values.</p>
+<p>You can do it with <code>one_geospark</code>.</p>
+<p>Here is an example on France.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">i &lt;-<span class="st"> </span><span class="kw">which</span>(f<span class="op">$</span><span class="st">`</span><span class="dt">Country/Region</span><span class="st">`</span><span class="op">==</span><span class="st">&quot;France&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="kw">is.na</span>(f<span class="op">$</span><span class="st">`</span><span class="dt">Province/State</span><span class="st">`</span>))</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">v &lt;-<span class="st"> </span>my_stats[i, ] <span class="op">%&gt;%</span><span class="st"> </span>as.numeric</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">my_coords &lt;-<span class="st"> </span>coords[i, ] <span class="op">%&gt;%</span><span class="st"> </span>as.matrix</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">sp_line &lt;-<span class="st"> </span><span class="kw">one_geospark</span>(my_coords, v, <span class="dt">width=</span><span class="dv">20</span>, <span class="dt">height=</span><span class="dv">20</span>, <span class="dt">mode=</span><span class="st">&quot;log&quot;</span>)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(sp_line))</a></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAADiUlEQVR4nO3cAWrrQBAEUfn+lw4IJwQibTm2dqZX1DuApl0Y/w+Jsz00tHUPSGcgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBwz0DbdS/rhoG2C/PcMNCldR73C3T56zFQ9QMbbdd++jwfevkTu0yIsz92ylPLzXjvPJ886bmlptV53CLQzDx3CDT5FSwfaO77Z/lAs/OsHqhg/dKBKsavHKhk+8KB5n/+7FcqjkxRtHzZQFXDVw1UtttAKYeuVTd7yUA1/349b9Wdukzp5gUD1U42UNS1KxQvXi5Q9WADhd37VPleA6Ud/Mi8H3+dn6w++ImOsQYKvPmulq0GSjz6nvoP6P1qx9H39ExdJ1DTUgNlnv2/rqEGCr37X207FwnUN3ONQI0rDZR7+nWdIw0UfPtlBgIGGmvdaKDk4y8y0FjvRANFX39F80IDZZ9n3QO775P2fe0DQPu+9gFj/fP6Fwz1z+tfMNQ/r3/BSMC6gAkDAesCJgwErAuYcC5hXMKGUwnjEjacShiXsOFMxLaIEScitkWMOJYxLWPFoYxpGSsOZUzLWHEoY1rGiiMhy0JmHAhZFjLjQMiykBkHQpaFzDgQsixkxl8pw1J2/JEyLGXHbvule8u3iCFpUX6LGBUx4kTCtoQNpxLGJWw4FTAuYMJA62/YBn82//BbEKDte2rp75xvfhMUGAj4ZXTQ8vdCFvn42fkHVUDD2KX6GIgYCNSvXauPgYiBQPncxfqU713p/4i71faWMxAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEPgCVVdDdnR3VxUAAAAASUVORK5CYII=" /><!-- --></p>
+<p>By default, the maximum value which defines the height will be the maximum value of the values you give to the function.</p>
+<p>You can put a custom max value. Here, I use the maximum value of the global dataset</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">sp_line &lt;-<span class="st"> </span><span class="kw">one_geospark</span>(my_coords, v, <span class="dt">max_v =</span> <span class="kw">max</span>(my_stats), <span class="dt">width=</span><span class="dv">20</span>, <span class="dt">height=</span><span class="dv">20</span>, <span class="dt">mode=</span><span class="st">&quot;log&quot;</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(sp_line))</a></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAADnElEQVR4nO3cC27iUBAFUbz/TY8Eo/wAFyTP3betOgtwX0qEzEhJLpt2XboHpDMQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBA4c6DLZcGrO2+gFXW20wZa8ua5PWnRc7IsfFWnDLTs7bOdMNBl3VfX7XkrH9ZvbZzrE1c/sNHi987/h65/ZI9D6mynCXRQne0sgQ58FacIdNz75xSBjsxzgkDH5pkf6PD9wwMdP392oKO/vrbhgSrGTw5Usn1woJrpcwMVfP5cz5RcOUDV8KmBynYPDVQ3e2agwtUjA1WOnhiodPPAQLWT5wUqXmygrHN/Vz14WqCi/2B8OVh874/q584K1LDWQHknf69j7KRA5R/Q16MNN3+pZ6qBIq/+RtNSA2WefV/XUAOF3n1Ty3f42+Wuw29pXGmg3NOv6xxpoODbLzMQMNC+1o0GSj7+IgPt652YH6h5oYGyz7Pugd33UffA7vukfV/7gH398/oX7Oqf179gT8C6gAk7AtYFTHguYVzChqcSxiVseCphXMKGZyK2RYx4ImJbxIgnIrZFjHgsY1rGiocypmWseCRkWciMB0KWhcx4IGRZyIwHQpaFzLiXMixlx52UYSk77qQMS9lxJ2VYyo47KcNSdvwUsytmyHd9P9X6U8yQ61+p/dA95lP3lMQm33Tv6r6Pugd230f+cAkwEOj6Lazwj+ZP/p4j6PhN9AlvnA/+rQdQPndYHwOR0r2zPn1uagNVHlukcvPEPgYiBgIGAoWjR/YxEDEQKFs98N+IVzNXFzIQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBAwEDAQMBD4BzsYQ2vNPiwWAAAAAElFTkSuQmCC" /><!-- --></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
