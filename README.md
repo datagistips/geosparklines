@@ -22,8 +22,8 @@ geosparks <- geospark(f[, c("Long", "Lat")], f[, 5:ncol(f)], width=20, height=20
 st_geometry(f) <- geosparks
 ```
 
-### Vignettes
-See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and a reproducible example transforming data into Plate Carrée CRS instead ;-)
+### Vignette
+See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and a reproducible example using Plate Carrée CRS instead ;-)
 
 ## Rendering
 You can render data :
