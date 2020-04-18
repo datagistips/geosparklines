@@ -33,7 +33,7 @@ You can render data :
 
 Here is a map rendered in QGIS :
 
-<img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=500 height=500 align=middle></img>
+<img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=322 height=312 align=middle></img>
 
 ## License
 Author : Mathieu Rajerison  
