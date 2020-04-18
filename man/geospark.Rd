@@ -23,3 +23,10 @@ returns a geometry collection (sfc)
 \description{
 Generates Spatial Sparklines as Simple Feature Collection (sfc)
 }
+\examples{
+library(readr)
+library(sf)
+f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+geosparks <- geospark(f[, c('Long', 'Lat')], f[, 5:ncol(f)], width=20, height=20, mode = 'log')
+st_geometry(f) <- geosparks
+}

@@ -52,6 +52,7 @@ plot(st_geometry(geosparks))
 You can add your GeoSparkLines to your data :
 ```{r}
 st_geometry(f) <- geosparks
+f <- st_set_crs(f, 4326)
 ```
 
 Let's plot them, based on a log value of the last day cases :
@@ -66,7 +67,7 @@ plot(f %>%
 ### Export your work
 ...for further styling, for example in QGIS
 ```{r eval=FALSE}
-st_write(f, "data/world_sparklines.gpkg", delete_dsn = TRUE)
+st_write(f, "world_sparklines.gpkg", delete_dsn = TRUE)
 
 ```
 
@@ -92,6 +93,7 @@ Now, you can use it the same way as before for your data. But you'll need to adj
 ```{r}
 geosparks <- geospark(coords_pc, my_stats, width=1000000, height=1000000, mode = "log")
 plot(geosparks)
+st_geometry(f) <- geosparks
 ```
 
 ## Individual sparklines
