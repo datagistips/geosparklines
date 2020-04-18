@@ -36,5 +36,5 @@ Here is a map rendered in QGIS :
 <img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=483 align=middle></img>
 
 ## License
+License : GPL-3  
 Author : Mathieu Rajerison  
-License : GPL-3
