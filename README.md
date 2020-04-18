@@ -28,7 +28,7 @@ See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations
 ## Rendering
 You can render data :
 
-- in R with `ggplot`, `leaflet`
+- in R, for instance with `ggplot`, `leaflet`
 - or export it and render it in QGIS.
 
 Here is a map rendered in QGIS :
