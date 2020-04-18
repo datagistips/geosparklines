@@ -1,8 +1,8 @@
 # geosparklines
 
-Turn your stats into a SparkLine Map !
+> Turn your stats into a SparkLine Map !
 
-geosparklines is an R package to create geographically placed sparklines
+`geosparklines` is an R package to create geographically placed sparklines
 
 ## Quick Start
 
