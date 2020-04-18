@@ -1,6 +1,8 @@
 # geosparklines
 
-`geosparklines` is an R package to put SparkLines on a Map
+`geosparklines` is an R package to generate SparkLines on a Map
+
+<img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=300 height=300></img>
 
 ## Quick Start
 
