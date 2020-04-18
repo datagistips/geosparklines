@@ -25,11 +25,16 @@ st_geometry(f) <- geosparks
 ### Vignettes
 See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and an example on using Plate Carrée CRS instead ;-)
 
-## Example map
-[Example of rendering in QGIS of COVID-19 cases in France](https://github.com/datagistips/sparkline_map/blob/master/images/map.png)
+## Rendering
+You can render data :
+
+- in R with `ggplot`, `leaflet`
+- or export it and render it in QGIS.
+
+Here is a map rendered in QGIS :
 
 <img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=500 height=500 align=middle></img>
 
 ## License
 Author : Mathieu Rajerison  
-GPL-3
+License : GPL-3
