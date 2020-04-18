@@ -9,13 +9,13 @@ geospark(coords, my_stats, width, height, mode = "normal")
 \arguments{
 \item{coords}{Points coordinates}
 
-\item{my_stats}{Values associated to points}
+\item{my_stats}{Values associated to points as a column-wise (long) format. For instance, one column = one date}
 
-\item{width}{Width}
+\item{width}{Total width of the line}
 
-\item{height}{Height}
+\item{height}{Total height of the line}
 
-\item{mode}{normal mode or log mode}
+\item{mode}{Normal or Log transformation mode}
 }
 \value{
 returns a geometry collection (sfc)

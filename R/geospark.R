@@ -1,10 +1,10 @@
 #' Calculate geographically placed Sparklines basd upon statistical values
 #'
 #' @param coords Points coordinates
-#' @param my_stats Values associated to points
-#' @param width Width
-#' @param height Height
-#' @param mode normal mode or log mode
+#' @param my_stats Values associated to points as a column-wise (long) format. For instance, one column = one date
+#' @param width Total width of the line
+#' @param height Total height of the line
+#' @param mode Normal or Log transformation mode
 #'
 #' @return returns a geometry collection (sfc)
 #' @import magrittr sf dplyr

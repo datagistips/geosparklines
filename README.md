@@ -23,7 +23,7 @@ st_geometry(f) <- geosparks
 ```
 
 ### Vignettes
-See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations ;-)
+See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and an example on using Plate Carrée CRS instead ;-)
 
 ## Example map
 [Example map on COVID-19 cases in France rendered in QGIS](https://github.com/datagistips/sparkline_map/blob/master/images/map.png)
