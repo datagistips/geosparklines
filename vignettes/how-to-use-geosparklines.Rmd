@@ -24,22 +24,24 @@ library(sp)
 ```
 
 ## Prepare your Data
-First, download the world COVID-19 cases from John Hopkins Institute
-```{r}
-f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
-```
-
 You'll need :
 
 - some coordinates for the source points
 - the stat values (here in wide column-wise format, not long row-wise format) which will draw the lines
+
+First, download the world COVID-19 cases from John Hopkins Institute :
+```{r}
+f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+```
+
+Then, let's select the relevant informations :
 ```{r}
 coords <- f[, c("Long", "Lat")]
 my_stats <- f[, 5:ncol(f)]
 ```
 
 ## Create your GeoSparkLines
-Define the width and height in spatial units, for your lines and the mode : `normal` or `log` for your values
+Define the width and height in spatial units of your lines and the transformation mode : `normal` or `log` for your values
 
 ```{r}
 ## Whole world
@@ -52,7 +54,7 @@ You can add your GeoSparkLines to your data :
 st_geometry(f) <- geosparks
 ```
 
-Let's plot it, based on a log value of the last day cases
+Let's plot them, based on a log value of the last day cases :
 
 ```{r message=FALSE}
 ## Plot
