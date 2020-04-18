@@ -14,6 +14,9 @@ devtools::install_github("datagistips/geosparklines", build_vignettes = TRUE)
 ### Usage
 
 ```r
+library(geosparklines)
+library(readr)
+
 f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
 
 geosparks <- geospark(f[, c("Long", "Lat")], f[, 5:ncol(f)], width=20, height=20, mode = "log") # log transformed sparklines
