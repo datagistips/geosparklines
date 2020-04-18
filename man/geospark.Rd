@@ -2,7 +2,7 @@
 % Please edit documentation in R/geospark.R
 \name{geospark}
 \alias{geospark}
-\title{Calculate geographically placed Sparklines basd upon statistical values}
+\title{Generates Spatial Sparklines as Simple Feature Collection (sfc)}
 \usage{
 geospark(coords, my_stats, width, height, mode = "normal")
 }
@@ -21,5 +21,5 @@ geospark(coords, my_stats, width, height, mode = "normal")
 returns a geometry collection (sfc)
 }
 \description{
-Calculate geographically placed Sparklines basd upon statistical values
+Generates Spatial Sparklines as Simple Feature Collection (sfc)
 }

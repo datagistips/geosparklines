@@ -1,4 +1,4 @@
-#' Calculate a geographically placed Sparkline
+#' Generate a Spatial Sparkline as Simple Feature Geometry (sfg)
 #'
 #' @param coords Point coordinates
 #' @param values Values associated to point

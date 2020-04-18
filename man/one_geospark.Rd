@@ -2,7 +2,7 @@
 % Please edit documentation in R/one_geospark.R
 \name{one_geospark}
 \alias{one_geospark}
-\title{Calculate a geographically placed Sparkline}
+\title{Generate a Spatial Sparkline as Simple Feature Geometry (sfg)}
 \usage{
 one_geospark(coords, values, max_v = NULL, width, height, mode = "normal")
 }
@@ -23,5 +23,5 @@ one_geospark(coords, values, max_v = NULL, width, height, mode = "normal")
 returns a geometry (sfg)
 }
 \description{
-Calculate a geographically placed Sparkline
+Generate a Spatial Sparkline as Simple Feature Geometry (sfg)
 }

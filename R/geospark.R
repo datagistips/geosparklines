@@ -1,4 +1,4 @@
-#' Calculate geographically placed Sparklines basd upon statistical values
+#' Generates Spatial Sparklines as Simple Feature Collection (sfc)
 #'
 #' @param coords Points coordinates
 #' @param my_stats Values associated to points as a column-wise (long) format. For instance, one column = one date

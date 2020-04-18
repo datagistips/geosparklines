@@ -1,6 +1,6 @@
 # geosparklines
 
-`geosparklines` is an R package to generate SparkLines as SimpleFeatureCollection (`sfc`) objects which can be further put on a map
+`geosparklines` is an R package that you can use to create SparkLines as SimpleFeatureCollection (`sfc`) objects which can be further put on a map
 
 ## Quick Start
 
@@ -23,7 +23,7 @@ st_geometry(f) <- geosparks
 ```
 
 ### Vignettes
-See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and an example on using Plate Carrée CRS instead ;-)
+See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and a reproducible example transforming data into Plate Carrée CRS instead ;-)
 
 ## Rendering
 You can render data :
