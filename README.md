@@ -14,6 +14,8 @@ devtools::install_github("datagistips/geosparklines", build_vignettes = TRUE)
 ```r
 library(geosparklines)
 library(readr)
+library(sf)
+library(dplyr)
 
 f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
 
@@ -26,12 +28,17 @@ st_geometry(f) <- geosparks
 See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and a reproducible example using Plate Carrée Coordinate Reference System instead ;-)
 
 ## Rendering
-You can render data :
+You can render data in R, for instance with `ggplot` or `leaflet`
 
-- in R, for instance with `ggplot` or `leaflet`
-- or export it and render it in [QGIS](https://www.qgis.org/).
+Also, you can export data :
 
-Here is a map rendered in QGIS :
+```r
+st_write(f, "data/my_sgeosparlines.gpkg) ## f is the sf object generated above
+```
+
+Then render it in [QGIS](https://www.qgis.org/)
+
+Here is a map of covid cases in France, rendered in QGIS :
 
 <img src="https://raw.githubusercontent.com/datagistips/sparkline_map/master/images/map.png" width=483 align=middle></img>
 
