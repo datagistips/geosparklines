@@ -15,7 +15,6 @@ devtools::install_github("datagistips/geosparklines", build_vignettes = TRUE)
 library(geosparklines)
 library(readr)
 library(sf)
-library(dplyr)
 
 f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
 
