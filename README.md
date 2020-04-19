@@ -33,7 +33,7 @@ You can render data in R, for instance with `ggplot` or `leaflet`
 Also, you can export data :
 
 ```r
-st_write(f, "data/my_sgeosparlines.gpkg) ## f is the sf object generated above
+st_write(f, "data/my_geosparlines.gpkg) ## f is the sf object generated above
 ```
 
 Then render it in [QGIS](https://www.qgis.org/)
