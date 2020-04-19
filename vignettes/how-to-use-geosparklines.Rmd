@@ -37,7 +37,8 @@ f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/
 Then, let's select the relevant informations :
 ```{r}
 coords <- f[, c("Long", "Lat")]
-my_stats <- f[, 5:ncol(f)]
+col_dates <- grep("[0-9]*/[0-9]*/[0-9]*", names(f)) # select all column dates
+my_stats <- f[, col_dates]
 ```
 
 ## Create your GeoSparkLines
@@ -59,9 +60,11 @@ Let's plot them, based on a log value of the last day cases :
 
 ```{r message=FALSE}
 ## Plot
+last_day <- names(f)[col_dates] %>% tail(1)
 plot(f %>%
-       mutate(v = ifelse(.$`4/17/20` <= 0, 0, log(.$`4/17/20`))) %>%
-       select(v))
+       mutate(last_n_cases = ifelse(.[[last_day]] <= 0, 0, log(.[[last_day]]))) %>%
+       select(last_n_cases),
+     main = last_day)
 ```
 
 ### Export your work

@@ -15,14 +15,15 @@ one_geospark <- function(coords, values, max_value = NULL, width, height, mode =
 
   if(is.null(max_value)) max_value <- max(values)
 
-  if(min(values)< 0) values <- values - min(values)
+  if(min(values) < 0) {
+    values <- values - min(values)
+    max_value <- max_value - min(values)
+  }
 
   if(mode == "normal") {
-
     mult <- height / max_value
     heights <- values * mult
   } else if (mode == "log"){
-
     mult <- height / log(max_value)
     log_v <- ifelse(values == 0, 0, log(values))
     heights <- log_v * mult
