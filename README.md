@@ -16,7 +16,7 @@ library(geosparklines)
 library(readr)
 library(sf)
 
-f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv") # it's John Hopkins Institute Data
 
 geosparks <- geospark(coords = f[, c("Long", "Lat")], my_stats = f[, 5:ncol(f)], width = 20, height = 20, mode = "log") # log transformed sparklines as an sfc (Simple Feature Collection)
 
