@@ -36,7 +36,7 @@ sp_line <- geosparkBM(my_coords, my_values, width=3, height=4, n = 21, direction
 
 Here are for example four geosparklines with varying widths, heights, and directions
 
-![](doc/bm.png)
+![](vignettes/RPlot.png)
 
 ### Vignette
 See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and a reproducible example using Plate Carrée Coordinate Reference System instead ;-)
