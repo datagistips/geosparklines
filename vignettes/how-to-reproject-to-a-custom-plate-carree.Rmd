@@ -1,0 +1,86 @@
+---
+title: "how-to-reproject-to-a-custom-plate-carree"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{how-to-reproject-to-a-custom-plate-carree}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE}
+library(geosparklines)
+library(readr)
+library(magrittr)
+library(dplyr)
+library(sf)
+```
+
+{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Prepare your Data
+First, download the world COVID-19 cases from John Hopkins Institute :
+```{r}
+f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+```
+
+Then, let's select the relevant informations :
+```{r}
+coords <- f[, c("Long", "Lat")]
+col_dates <- grep("[0-9]*/[0-9]*/[0-9]*", names(f)) # select all column dates
+my_stats <- f[, col_dates]
+```
+
+## Reproject to Plate Carrée
+WGS-84 might not be the appropriate Coordinate Reference System as it distorts the countries and the distances on a world map. For instance, countries seem bigger than they are as we move upwards or downwards.
+
+This projection might be prejudiciable to the reading of your sparklines.
+
+That's why an Equal-Distance projection may be more appropriate. For example, Plate Carrée projection preserves proportion of countries.
+
+### A custom Plate Carrée
+Nevertheless, you might want to change the CRS bounds of your projection, because if you have big lines, high and wide, they might overflow with your map.
+
+I created my own Plate Carrée CRS with shifted bounds (see lon_1, lat_1, lon_2 and lat_2 paramaters) :
+```{r}
+library(sp)
+
+xmin <- -1000
+ymin <- -1000
+xmax <- 1000
+ymax <- 1000
+
+crs_string <- sprintf("+proj=eqc +lat_ts=0 +lat_1=%d +lon_1=%d  +lat_2=%d +lon_2=%d  +lat_0=0 +lon_0=0  +x_0=0 +y_0=0  +datum=WGS84 +units=m +no_defs", ymin, xmin, ymax, xmax )
+
+my_crs <- crs_string %>% CRS
+```
+
+Let's reproject data
+```{r message = FALSE}
+coords_pc <- lapply(1:nrow(coords), function(x) {
+  st_point(as.numeric(coords[x, ])) %>% 
+  st_sfc %>% 
+  st_set_crs(4326) %>% st_transform(my_crs) %>% 
+  st_sfc %>% 
+  st_coordinates
+}) %>% do.call(rbind, .)
+
+```
+
+Now, you can use it the same way as before for your data. But you'll need to adjust width and height according to this new coordinate reference system
+```{r}
+geosparks <- geospark(coords_pc, my_stats, width=1000000, height=10000000, mode = "log")
+plot(geosparks)
+st_geometry(f) <- geosparks
+```

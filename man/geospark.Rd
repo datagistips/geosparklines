@@ -4,7 +4,7 @@
 \alias{geospark}
 \title{Generates Spatial Sparklines as Simple Feature Collection (sfc)}
 \usage{
-geospark(coords, my_stats, width, height, mode = "normal")
+geospark(coords, my_stats, width, height, direction = "ne", mode = "normal")
 }
 \arguments{
 \item{coords}{Points coordinates}
@@ -15,13 +15,23 @@ geospark(coords, my_stats, width, height, mode = "normal")
 
 \item{height}{Total height of the line}
 
+\item{direction}{Direction of lines, upward (north), downward (south), left (west) or right (east). For instance, "ne" will generate upward right lines, "sw" will generated downward left lines.}
+
 \item{mode}{Normal or Log transformation mode}
 }
 \value{
 returns a geometry collection (sfc)
+
+returns a geometry collection (sfc)
 }
 \description{
 Generates Spatial Sparklines as Simple Feature Collection (sfc)
+}
+\details{
+This function calculates sparklines, based on statistical data, for instance Time-Series
+You can choose width, height of the line, but also direction of the lines.
+The Log transformation helps having smoother lines when having an exponential evolution.
+You can pilot the rendering of individual lines with finer details, with \code{singleGeospark}
 }
 \examples{
 library(readr)
@@ -30,4 +40,7 @@ f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/
 geosparks <- geospark(f[, c('Long', 'Lat')], f[, 5:ncol(f)], width=20, height=20, mode = 'log')
 plot(geosparks)
 st_geometry(f) <- geosparks
+}
+\seealso{
+\code{\link[geosparklines:singleGeospark]{geosparklines::singleGeospark()}}, \code{browseVignettes("geosparklines")}
 }

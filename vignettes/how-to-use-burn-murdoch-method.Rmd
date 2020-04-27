@@ -1,0 +1,118 @@
+---
+title: "how-to-use-burn-murdoch-method"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{how-to-use-burn-murdoch-method}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(geosparklines)
+library(RcppRoll)
+library(readr)
+library(sf)
+```
+
+John Burn-Murdoch is a DataViz Designer at Financial Times. He covered the covid-19 crisis with awesome wisualizations, one of which transforms input data in a way that captures better the dynamics.
+
+See his interview on [Medium](https://medium.com/nightingale/how-john-burn-murdochs-influential-dataviz-helped-the-world-understand-coronavirus-6cb4a09795ae)
+
+His transformations consists in :
+
+- taking a 7-day rolling average of cases 
+- log transforming this 7-day rolling average
+
+I integrated his approach in the `geosparklines` package with a dedicated `geosparkBM` function
+
+## Prepare Data
+```{r message=FALSE}
+f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+```
+
+Extract necessary informations for sparklines :
+```{r}
+coords <- f[, c("Long", "Lat")]
+col_dates <- grep("[0-9]*/[0-9]*/[0-9]*", names(f)) # select all column dates
+my_stats <- data.frame(f)[, col_dates]
+
+```
+
+## Generate the sparklines
+Then generate the 7-day mean-rolled sparkline based upon Burn Murdocn Method
+```{r}
+## Whole world
+geosparks <- geosparkBM(coords, my_stats, width=4, height=2, direction = "ne") %>% st_set_crs(4326)
+
+## Add geometries to data
+st_geometry(f) <- geosparks
+```
+
+Let's do some simple plotting :
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggplot2)
+library(rgeos)
+library(rgeos)
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+last_day <- names(f)[col_dates %>% tail(1)]
+
+ggplot() +
+    geom_sf(data=world) +
+    geom_sf(data=f, col="red") +
+    coord_sf(xlim = c(-20, 30), ylim = c(25, 60), expand = FALSE) +
+    ggtitle(sprintf("Covid-19 cases sparklines (Burn-Murdoch's method)\n%s", last_day))
+```
+
+## Pilot the rendering of individual lines
+You can do it on one line if you want. This way, you can control the rendering of individual lines : width, height, direction
+```{r}
+i <- which(f$`Country/Region`=="France" & is.na(f$`Province/State`))
+my_values <- my_stats[i, ] %>% as.numeric
+my_coords <- coords[i, ] %>% as.matrix
+sp_line <- singleGeosparkBM(my_coords, my_values, width = 20, height = 20, n = 7)
+plot(st_geometry(sp_line))
+```
+
+Or, maybe, try a smoother line with a 3-week moving average :
+```{r}
+sp_line <- singleGeosparkBM(my_coords, my_values, width=20, height=20, n = 21)
+plot(st_geometry(sp_line))
+```
+
+## Let's show how to generate multiple directional lines (just to show how it works) 
+
+Generate the lines with random widths and heights and all directions, just to show you how you can pilot the rendering precisely
+
+```{r}
+out <- lapply(c("ne", "nw", "se", "sw"), function(x) singleGeosparkBM(my_coords, my_values, width=runif(1,4,6), height=runif(1,2,4), n = 21, direction = x))
+
+geoms <- st_sfc(out) %>% st_set_crs(4326)
+```
+You could also change coordinates not to be on the centroid.
+
+Let's plot it :
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggplot2)
+library(rgeos)
+library(rgeos)
+
+fr <- ne_countries(country = "france", scale = "medium", returnclass = "sf")
+
+ggplot() +
+    geom_sf(data=fr) +
+    geom_sf(data=geoms, col=c("red", "blue", "green", "orange"), size = 1.2) +
+    coord_sf(xlim = c(-7, 12), ylim = c(40, 52), expand = FALSE) +
+    ggtitle(sprintf("Covid-19 cases sparklines (Burn-Murdoch's method)\n4-directions with random widths and heights\n%s", last_day))
+```

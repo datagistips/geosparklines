@@ -1,6 +1,6 @@
 Package: geosparklines
 Title: Create Geographic Sparklines
-Version: 0.1
+Version: 0.2
 Authors@R: 
     person(given = "Mathieu",
            family = "Rajerison",
@@ -16,7 +16,12 @@ Imports: sf,
     magrittr,
     dplyr,
     readr,
-    sp
+    sp,
+    RcppRoll,
+    rnaturalearth,
+    rnaturalearthdata,
+    ggplot2,
+    rgeos
 Suggests: 
     knitr,
     rmarkdown

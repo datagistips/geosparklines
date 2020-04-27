@@ -20,7 +20,6 @@ library(readr)
 library(magrittr)
 library(dplyr)
 library(sf)
-library(sp)
 ```
 
 ## Prepare your Data
@@ -30,7 +29,7 @@ You'll need :
 - the stat values (here in wide column-wise format, not long row-wise format) which will draw the lines
 
 First, download the world COVID-19 cases from John Hopkins Institute :
-```{r}
+```{r message = FALSE}
 f <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
 ```
 
@@ -38,7 +37,7 @@ Then, let's select the relevant informations :
 ```{r}
 coords <- f[, c("Long", "Lat")]
 col_dates <- grep("[0-9]*/[0-9]*/[0-9]*", names(f)) # select all column dates
-my_stats <- f[, col_dates]
+my_stats <- data.frame(f)[, col_dates]
 ```
 
 ## Create your GeoSparkLines
@@ -46,25 +45,30 @@ Define the width and height in spatial units of your lines and the transformatio
 
 ```{r}
 ## Whole world
-geosparks <- geospark(coords, my_stats, width=20, height=20, mode = "log")
-plot(st_geometry(geosparks))
+geosparks <- geospark(coords, my_stats, width=4, height=2, direction = "ne", mode = "log") %>% st_set_crs(4326)
+print(class(geosparks))
 ```
 
 You can add your GeoSparkLines to your data :
 ```{r}
 st_geometry(f) <- geosparks
-f <- st_set_crs(f, 4326)
 ```
 
-Let's plot them, based on a log value of the last day cases :
+Let's do some simple plotting :
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggplot2)
+library(rgeos)
+world <- ne_countries(scale = "medium", returnclass = "sf")
 
-```{r message=FALSE}
-## Plot
-last_day <- names(f)[col_dates] %>% tail(1)
-plot(f %>%
-       mutate(last_n_cases = ifelse(.[[last_day]] <= 0, 0, log(.[[last_day]]))) %>%
-       select(last_n_cases),
-     main = last_day)
+last_day <- names(f)[col_dates %>% tail(1)]
+
+ggplot() +
+    geom_sf(data=world) +
+    geom_sf(data=f, col="red") +
+    coord_sf(xlim = c(-20, 30), ylim = c(25, 60), expand = FALSE) +
+    ggtitle(sprintf("Covid-19 cases sparklines (log-transformed)\n%s", last_day))
 ```
 
 ### Export your work
@@ -74,35 +78,10 @@ st_write(f, "world_sparklines.gpkg", delete_dsn = TRUE)
 
 ```
 
-
-## Reproject to Plate Carrée
-Notice the Coordinate Reference System is not appropriate for our purpose because it's WGS84 and it distorts the lines to the extreme as we go North or South.
-
-So, let's the adopt a Plate Carrée projection. I created my own CRS with shifted bounds (see lon_1, lat_1, lon_2 and lat_2 paramaters) :
-```{r}
-library(sp)
-crs_string <- "+proj=eqc +lat_ts=0 +lat_1=-1000 +lon_1=-1000  +lat_2=1000 +lon_2=1000  +lat_0=0 +lon_0=0  +x_0=0 +y_0=0  +datum=WGS84 +units=m +no_defs"
-
-my_crs <- crs_string %>% CRS
-```
-
-Let's reproject data
-```{r}
-coords_pc <- lapply(1:nrow(coords), function(x) st_point(as.numeric(coords[x, ]))) %>% st_sfc %>% st_set_crs(4326) %>% st_transform(my_crs) %>% st_sfc %>% st_coordinates
-
-```
-
-Now, you can use it the same way as before for your data. But you'll need to adjust width and height according to the coordinate reference system
-```{r}
-geosparks <- geospark(coords_pc, my_stats, width=1000000, height=1000000, mode = "log")
-plot(geosparks)
-st_geometry(f) <- geosparks
-```
-
 ## Individual sparklines
-You may want to create sparklines individually, for example to pilot the individual heights and widths of your sparklines based on statistical values.
+You might want to create sparklines individually, for example to pilot the individual heights and widths of your sparklines more precisely
 
-You can do it with `one_geospark`.
+You can do it with `singleGeospark`.
 
 Here is an example on France.
 
@@ -110,7 +89,7 @@ Here is an example on France.
 i <- which(f$`Country/Region`=="France" & is.na(f$`Province/State`))
 v <- my_stats[i, ] %>% as.numeric
 my_coords <- coords[i, ] %>% as.matrix
-sp_line <- one_geospark(my_coords, v, width=20, height=20, mode="log")
+sp_line <- singleGeospark(my_coords, v, width=20, height=20, mode="log")
 plot(st_geometry(sp_line))
 ```
 
@@ -118,6 +97,6 @@ By default, the maximum value which defines the height will be the maximum value
 
 You can put a custom max value. Here, I use the maximum value of the global dataset
 ```{r}
-sp_line <- one_geospark(my_coords, v, max_v = max(my_stats), width=20, height=20, mode="log")
+sp_line <- singleGeospark(my_coords, v, max_v = max(my_stats), width=20, height=20, mode="log")
 plot(st_geometry(sp_line))
 ```

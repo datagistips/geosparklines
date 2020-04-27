@@ -11,6 +11,7 @@ devtools::install_github("datagistips/geosparklines", build_vignettes = TRUE)
 
 ### Usage
 
+Crteate geosparklines from a data frame
 ```r
 library(geosparklines)
 library(readr)
@@ -22,6 +23,20 @@ geosparks <- geospark(coords = f[, c("Long", "Lat")], my_stats = f[, 5:ncol(f)],
 
 st_geometry(f) <- geosparks
 ```
+
+Or individual geosparklines, for which you can control the width, height, direction based on data
+```r
+sp_line <- singleGeospark(my_coords, v, width=20, height=20, direction="ne", mode="log")
+```
+
+There is also a method for generating sparklines inspired by FT Dataviz designer John Burn-Murdoch. 
+```r
+sp_line <- geosparkBM(my_coords, my_values, width=3, height=4, n = 21, direction = "ne"))
+```
+
+Here are for example four geosparklines with varying widths, heights, and directions
+
+![](doc/bm.png)
 
 ### Vignette
 See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and a reproducible example using Plate Carrée Coordinate Reference System instead ;-)
