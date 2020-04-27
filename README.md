@@ -36,10 +36,12 @@ sp_line <- geosparkBM(my_coords, my_values, width=3, height=4, n = 21, direction
 
 Here are for example four geosparklines with varying widths, heights, and directions illustrating the evolution of covid-19 cases in France
 
-![](vignettes/RPlot.png)
+![](vignettes/Rplot.png)
 
-### Vignette
-See [vignette](vignettes/how-to-use-geosparklines.html) for further explanations and a reproducible example using Plate Carrée Coordinate Reference System instead ;-)
+### Vignettes
+- [This vignette](vignettes/how-to-use-geosparklines.html) is the main vignette with a fully reproducible example.
+- See [this vignette](vignettes/how-to-reproject-to-a-custom-plate-carree.html) to see how to reproject your data to an Equal Area projection like Plate Carrée.
+- [This vignette](vignettes/how-to-use-burn-murdoch-method.html) illustrates ther John Burn Murdoch's smoothing method.
 
 ## Rendering
 You can render data in R, for instance with `ggplot` or `leaflet`
