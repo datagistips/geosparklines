@@ -39,9 +39,9 @@ Here are for example four geosparklines with varying widths, heights, and direct
 ![](vignettes/Rplot.png)
 
 ### Vignettes
-- [This vignette](vignettes/how-to-use-geosparklines.html) is the main vignette with a fully reproducible example.
-- See [this vignette](vignettes/how-to-reproject-to-a-custom-plate-carree.html) to see how to reproject your data to an Equal Area projection like Plate Carrée.
-- [This vignette](vignettes/how-to-use-burn-murdoch-method.html) illustrates ther John Burn Murdoch's smoothing method.
+- [Meet geosparklines with a reproducible example](vignettes/how-to-use-geosparklines.html)
+- [See how to reproject your data to an Equal Area projection like Plate Carrée](vignettes/how-to-reproject-to-a-custom-plate-carree.html)
+- [Put John Burn Murdoch's smoothed Sparklines on a map](vignettes/how-to-use-burn-murdoch-method.html) 
 
 ## Rendering
 You can render data in R, for instance with `ggplot` or `leaflet`
