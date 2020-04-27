@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>how-to-use-burn-murdoch-method</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">how-to-use-burn-murdoch-method</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(geosparklines)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(RcppRoll)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(sf)</a></code></pre></div>
+<p>John Burn-Murdoch is a DataViz Designer at Financial Times. He covered the covid-19 crisis with awesome wisualizations, one of which transforms input data in a way that captures better the dynamics.</p>
+<p>See his interview on <a href="https://medium.com/nightingale/how-john-burn-murdochs-influential-dataviz-helped-the-world-understand-coronavirus-6cb4a09795ae">Medium</a></p>
+<p>His transformations consists in :</p>
+<ul>
+<li>taking a 7-day rolling average of cases</li>
+<li>log transforming this 7-day rolling average</li>
+</ul>
+<p>I integrated his approach in the <code>geosparklines</code> package with a dedicated <code>geosparkBM</code> function</p>
+<div id="prepare-data" class="section level2">
+<h2>Prepare Data</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv&quot;</span>)</a></code></pre></div>
+<p>Extract necessary informations for sparklines :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">coords &lt;-<span class="st"> </span>f[, <span class="kw">c</span>(<span class="st">&quot;Long&quot;</span>, <span class="st">&quot;Lat&quot;</span>)]</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">col_dates &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;[0-9]*/[0-9]*/[0-9]*&quot;</span>, <span class="kw">names</span>(f)) <span class="co"># select all column dates</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">my_stats &lt;-<span class="st"> </span><span class="kw">data.frame</span>(f)[, col_dates]</a></code></pre></div>
+</div>
+<div id="generate-the-sparklines" class="section level2">
+<h2>Generate the sparklines</h2>
+<p>Then generate the 7-day mean-rolled sparkline based upon Burn Murdocn Method</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">## Whole world</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">geosparks &lt;-<span class="st"> </span><span class="kw">geosparkBM</span>(coords, my_stats, <span class="dt">width=</span><span class="dv">4</span>, <span class="dt">height=</span><span class="dv">2</span>, <span class="dt">direction =</span> <span class="st">&quot;ne&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_set_crs</span>(<span class="dv">4326</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">## Add geometries to data</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">st_geometry</span>(f) &lt;-<span class="st"> </span>geosparks</a></code></pre></div>
+<p>Let’s do some simple plotting :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(rnaturalearth)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(rnaturalearthdata)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">library</span>(rgeos)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">library</span>(rgeos)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">world &lt;-<span class="st"> </span><span class="kw">ne_countries</span>(<span class="dt">scale =</span> <span class="st">&quot;medium&quot;</span>, <span class="dt">returnclass =</span> <span class="st">&quot;sf&quot;</span>)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">last_day &lt;-<span class="st"> </span><span class="kw">names</span>(f)[col_dates <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tail</span>(<span class="dv">1</span>)]</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data=</span>world) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data=</span>f, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="st">    </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">30</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">60</span>), <span class="dt">expand =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">sprintf</span>(<span class="st">&quot;Covid-19 cases sparklines (Burn-Murdoch's method)</span><span class="ch">\n</span><span class="st">%s&quot;</span>, last_day))</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="pilot-the-rendering-of-individual-lines" class="section level2">
+<h2>Pilot the rendering of individual lines</h2>
+<p>You can do it on one line if you want. This way, you can control the rendering of individual lines : width, height, direction</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">i &lt;-<span class="st"> </span><span class="kw">which</span>(f<span class="op">$</span><span class="st">`</span><span class="dt">Country/Region</span><span class="st">`</span><span class="op">==</span><span class="st">&quot;France&quot;</span> <span class="op">&amp;</span><span class="st"> </span><span class="kw">is.na</span>(f<span class="op">$</span><span class="st">`</span><span class="dt">Province/State</span><span class="st">`</span>))</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">my_values &lt;-<span class="st"> </span>my_stats[i, ] <span class="op">%&gt;%</span><span class="st"> </span>as.numeric</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">my_coords &lt;-<span class="st"> </span>coords[i, ] <span class="op">%&gt;%</span><span class="st"> </span>as.matrix</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">sp_line &lt;-<span class="st"> </span><span class="kw">singleGeosparkBM</span>(my_coords, my_values, <span class="dt">width =</span> <span class="dv">20</span>, <span class="dt">height =</span> <span class="dv">20</span>, <span class="dt">n =</span> <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(sp_line))</a></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAD1UlEQVR4nO3c3W7TQAAG0c37vzSQpCU/rsepDDtu5tykUCn7edS6wgLGKavG7AF2BQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAj8q0L+4mJ8UaJzG2P16fkqgMS5xCvSF8fC6+xsf3Xj6YO83Prax8NHe73w4t/fkAj353WZcXs6/uvvErufs+m7/z82XzMcPsOdP7XvQkax/lex6TYcMBKPfPRDfZPa8qOMF2rD4rQNtGfzOgbbtHftd18ECbZy745/qjxVo+3W/Z6BXxu51YQcK9Nq3zTsGeqNTv2PS0gI5j33Z/k/jtx486dwXzZtZIO3Jr5i4skDeo7ebdoc+HSPQ1I0FMh++zdyJBVKfvsHMG/T5/LnHox0fnn53gNv0fdMHgOn7pg9YN3/e/AWr5s+bv2DV/HnzF6yY/SP+vGH2gBWKbYoRX1BsU4xY5pjmWLHIMc2xYpFjmmPFIsc0x4olkmWSGQskyyQzFkiWSWYskCyTzHhmGWbZ8cQyzLLjiWWYZccjzS7NkHuGBx0XmiF3RKtEU26IVomm/GUaZdryyTTKtOWTaZRpywfVJtWYK9Um1Zgr1SbVmCvVJtWYK9Um1ZgL1yTXmjPXJNeaM9ck15oz1yTXmjPXJNeaP2SLZHNOukWyOb5Btj26QbY9ukG2PbpBtj26QbY9ukG2PbpBtj26Qe0BtkG2PbpBtj26QbY9ukG2PaZB5/+zVrTnQjRoCP4J7zPRoALd/8Wx8eFmytsHuj1uPP5WgU4FeuW8AsF5S4F8ff5/oM/bcoHgzMdAY9acdQUCUxbdfzONm5cCfR5aIDh0OZDPnFmjQHhqgeDUAsGxBVo/9ubBx+NjDxfpLI8CgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBX710QxrTM3wRAAAAAElFTkSuQmCC" /><!-- --></p>
+<p>Or, maybe, try a smoother line with a 3-week moving average :</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">sp_line &lt;-<span class="st"> </span><span class="kw">singleGeosparkBM</span>(my_coords, my_values, <span class="dt">width=</span><span class="dv">20</span>, <span class="dt">height=</span><span class="dv">20</span>, <span class="dt">n =</span> <span class="dv">21</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(sp_line))</a></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAD1klEQVR4nO3d0WoiQQAFUf3/n15iXDfqtLUQZ7pa6jwEyYN9p2AmhBA8nfPSafYAuwKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoECgQKBAoGPCbTXhXxCoNOX76+nt1/PBwS6v4R3R/q4QJfvvLHR8oHef1M9vP++b7+zHZ45T0fsfcBu9ngibx1zwBk7OCbO5aSDznmn4+qclwx07OT1Ah28eLlAR95el/OOPe63js6zWqAJa5cKNGPsSoGmbF0o0Jyp6wSatHSZQLOGrhJo2s5FAs2buUagiSuXCDRz5AqBpm5cINDxv3/dnT7z8P8yeaE+0OyBs89HswfOPp9M3zd9wGtzH9CXBbMHvCRYJ5jwgmCdYMKYYZxhw5BhnGHDwKF/QB0ybNgmWSaZsUGyTDJjg2SZZMYGyTLJjGeWYZYdTyzDLDseOH7Ef7HseOCZ5Vnyk2iVaMoPolWiKf+YRpm23JhGmbb8pdqkGnOl2qQa8801ybXmi2yRbM5Zt0g2xzfItkc3qD3ANsi2RzfItkc3yLbHNkg256xbJJtz1i2SzTnbFrnWXLgmudZcqCapxlypNqnGXKk2qcZcmTaZttyYRpm23IhGiab84FnlWXLHM8uz5I5mlmbIA80uzZAHml2aIQ8suyw7nliGWXY8sQyz7HgiGSaZsUGyTDJjg2SZZMYGxzLHik2OaY4VmxzTHCs2OaY5VmxSTFOMGFBsU4wYUGxTjBhQbFOMGFBsU4wYUGxTjBhQbFOMGDBsM2wYMowzbBgyjDNsGDKMM2wYMowzbBgyjDNsGDp63MY/xKv7TFhXIDzy/mOL3H2mzTttvFKaNu/09MJp3rzrjSbvM3nfQR+i9hv2fdMVCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQIFAgUCBQI/AFb8kNyg+rFUwAAAABJRU5ErkJggg==" /><!-- --></p>
+</div>
+<div id="lets-show-how-to-generate-multiple-directional-lines-just-to-show-how-it-works" class="section level2">
+<h2>Let’s show how to generate multiple directional lines (just to show how it works)</h2>
+<p>Generate the lines with random widths and heights and all directions, just to show you how you can pilot the rendering precisely</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">c</span>(<span class="st">&quot;ne&quot;</span>, <span class="st">&quot;nw&quot;</span>, <span class="st">&quot;se&quot;</span>, <span class="st">&quot;sw&quot;</span>), <span class="cf">function</span>(x) <span class="kw">singleGeosparkBM</span>(my_coords, my_values, <span class="dt">width=</span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">6</span>), <span class="dt">height=</span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>), <span class="dt">n =</span> <span class="dv">21</span>, <span class="dt">direction =</span> x))</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">geoms &lt;-<span class="st"> </span><span class="kw">st_sfc</span>(out) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_set_crs</span>(<span class="dv">4326</span>)</a></code></pre></div>
+<p>You could also change coordinates not to be on the centroid.</p>
+<p>Let’s plot it :</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(rnaturalearth)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">library</span>(rnaturalearthdata)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">library</span>(rgeos)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">library</span>(rgeos)</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">fr &lt;-<span class="st"> </span><span class="kw">ne_countries</span>(<span class="dt">country =</span> <span class="st">&quot;france&quot;</span>, <span class="dt">scale =</span> <span class="st">&quot;medium&quot;</span>, <span class="dt">returnclass =</span> <span class="st">&quot;sf&quot;</span>)</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data=</span>fr) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">data=</span>geoms, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>), <span class="dt">size =</span> <span class="fl">1.2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="st">    </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">12</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">52</span>), <span class="dt">expand =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">sprintf</span>(<span class="st">&quot;Covid-19 cases sparklines (Burn-Murdoch's method)</span><span class="ch">\n</span><span class="st">4-directions with random widths and heights</span><span class="ch">\n</span><span class="st">%s&quot;</span>, last_day))</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

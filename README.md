@@ -34,7 +34,7 @@ There is also a method for generating sparklines inspired by FT Dataviz designer
 sp_line <- geosparkBM(my_coords, my_values, width=3, height=4, n = 21, direction = "ne"))
 ```
 
-Here are for example four geosparklines with varying widths, heights, and directions
+Here are for example four geosparklines with varying widths, heights, and directions illustrating the evolution of covid-19 cases in France
 
 ![](vignettes/RPlot.png)
 
